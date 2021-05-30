@@ -26,7 +26,7 @@ RUN cargo build --release && strip target/x86_64-unknown-linux-musl/release/spla
 # merge it down into a single folder
 FROM builder as merge
 COPY --from=downloader /build/et /et
-COPY --from=builder --chmod=755 /home/rust/src/target/x86_64-unknown-linux-musl/release/splash /et/external/splash
+COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/splash /et/external/splash
 
 # create our scratch image with no dependencies
 FROM scratch as pure
